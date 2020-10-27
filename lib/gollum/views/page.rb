@@ -207,7 +207,7 @@ module Precious
       # Wraps page formatted data to Nokogiri::HTML document.
       #
       def build_document(content)
-        Nokogiri::HTML::fragment(%{<div id="gollum-root">} + content.to_s + %{</div>}, 'UTF-8')
+        Nokogiri::HTML::fragment(%{<div id="gollum-root">} + content.gsub(/[$]Company/i, @company_name).to_s + %{</div>}, 'UTF-8')
       end
 
       # Finds header node inside Nokogiri::HTML document.

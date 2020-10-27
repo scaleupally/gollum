@@ -102,8 +102,9 @@ module Precious
       @critic_markup = settings.wiki_options[:critic_markup]
       @redirects_enabled = settings.wiki_options.fetch(:redirects_enabled, true)
       @per_page_uploads = settings.wiki_options[:per_page_uploads]
-      
+
       @wiki_title = settings.wiki_options.fetch(:title, 'Gollum Wiki')
+      @company_name = settings.wiki_options.fetch(:company_name, 'Scaleupally')
 
       forbid unless @allow_editing || request.request_method == 'GET'
       Precious::App.set(:mustache, {:templates => settings.wiki_options[:template_dir]}) if settings.wiki_options[:template_dir]
