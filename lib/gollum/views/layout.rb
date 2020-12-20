@@ -82,7 +82,13 @@ module Precious
       def latest_changes
         false
       end
-      
+
+      def flash_message
+        @flash = @session['flash.messages']
+        @session['flash.messages'] = nil
+
+        @flash
+      end
     end
   end
 end

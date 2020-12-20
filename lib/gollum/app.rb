@@ -88,7 +88,7 @@ module Precious
 
     # Sinatra error handling
     configure :development, :staging do
-      enable :show_exceptions, :dump_errors
+      enable :show_exceptions, :dump_errors, :sessions
       disable :raise_errors, :clean_trace
     end
 
@@ -121,7 +121,9 @@ module Precious
       @use_static_assets = settings.wiki_options.fetch(:static, settings.environment == :production || settings.environment == :staging)
       @static_assets_path = settings.wiki_options.fetch(:static_assets_path, ::File.join(File.dirname(__FILE__), 'public/assets'))
       @mathjax_path = ::File.join(File.dirname(__FILE__), 'public/gollum/javascript/MathJax')
-      
+
+      @session = session
+
       Sprockets::Helpers.configure do |config|
         config.environment = settings.sprockets
         config.environment.context_class.class_variable_set(:@@base_url, @base_url)
