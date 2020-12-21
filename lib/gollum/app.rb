@@ -121,7 +121,7 @@ module Precious
       @use_static_assets = settings.wiki_options.fetch(:static, settings.environment == :production || settings.environment == :staging)
       @static_assets_path = settings.wiki_options.fetch(:static_assets_path, ::File.join(File.dirname(__FILE__), 'public/assets'))
       @mathjax_path = ::File.join(File.dirname(__FILE__), 'public/gollum/javascript/MathJax')
-
+      @repo_type = settings.wiki_options.fetch(:repo_type, 'child')
       @session = session
 
       Sprockets::Helpers.configure do |config|
@@ -307,7 +307,8 @@ module Precious
           return
         end
         committer.commit
-        
+        committer.wiki.repo.git.push('origin', committer.wiki.ref)
+        committer.wiki.repo.git.push('origin', committer.wiki.ref)
         # Renaming preserves format, so add the page's format to the renamed path to retrieve the renamed page
         new_path = "#{rename}.#{Gollum::Page.format_to_ext(page.format)}"
         # Add a redirect from the old page to the new
@@ -329,7 +330,7 @@ module Precious
           # Signal edit collision and return the page's most recent version
           halt 412, {etag: page.sha, text_data: page.text_data}.to_json
         end
-        
+
         committer = Gollum::Committer.new(wiki, commit_message)
         commit    = { :committer => committer }
 
@@ -338,7 +339,8 @@ module Precious
         update_wiki_page(wiki, page.footer, params[:footer], commit) if params[:footer]
         update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
         committer.commit
-
+        committer.wiki.repo.git.push('origin', committer.wiki.ref)
+        committer.wiki.repo.git.push('origin', committer.wiki.ref)
       end
 
       post '/delete/*' do

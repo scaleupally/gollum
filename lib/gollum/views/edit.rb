@@ -67,7 +67,7 @@ module Precious
       def etag
         @etag
       end
-      
+
       def allow_uploads
         @allow_uploads
       end

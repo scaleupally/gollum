@@ -33,7 +33,7 @@ module Precious
           }
         end
       end
-      
+
       def editable
         @editable
       end

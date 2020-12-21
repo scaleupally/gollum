@@ -41,9 +41,9 @@ module Precious
       def content
         @template_page
       end
-      
+
       private
-      
+
       def find_format
         @found_format ||= (Gollum::Page.format_for("#{@name}#{@ext}") || default_markup)
       end

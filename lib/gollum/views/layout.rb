@@ -34,6 +34,10 @@ module Precious
         @base_url
       end
 
+      def pull_button
+        @repo_type == 'child'
+      end
+
       def custom_css
         clean_url(custom_path, "custom.css")
       end
@@ -70,15 +74,15 @@ module Precious
       def search
         false
       end
-      
+
       def history
         false
       end
-      
+
       def overview
         false
       end
-      
+
       def latest_changes
         false
       end
