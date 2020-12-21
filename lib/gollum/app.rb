@@ -307,7 +307,7 @@ module Precious
           return
         end
         committer.commit
-        committer.wiki.repo.git.push('origin', committer.wiki.ref)
+        committer.wiki.repo.git.pull('origin', committer.wiki.ref)
         committer.wiki.repo.git.push('origin', committer.wiki.ref)
         # Renaming preserves format, so add the page's format to the renamed path to retrieve the renamed page
         new_path = "#{rename}.#{Gollum::Page.format_to_ext(page.format)}"
@@ -339,7 +339,7 @@ module Precious
         update_wiki_page(wiki, page.footer, params[:footer], commit) if params[:footer]
         update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
         committer.commit
-        committer.wiki.repo.git.push('origin', committer.wiki.ref)
+        committer.wiki.repo.git.pull('origin', committer.wiki.ref)
         committer.wiki.repo.git.push('origin', committer.wiki.ref)
       end
 
